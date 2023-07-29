@@ -1,20 +1,18 @@
 "use client";
 
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const endpoint = process.env.NEXT_PUBLIC_API_ENDPOINT as string;
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [sentence, setSentence] = useState<string>("");
-  const [answer, setAnswer] = useState();
+  const [answer, setAnswer] = useState<string>("");
 
   const analyzeSentence = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsLoading(true);
-
-    console.log("かいし");
 
     const res = await axios.post(
       endpoint,
@@ -31,22 +29,37 @@ export default function Home() {
     setAnswer(res.data.message);
 
     setIsLoading(false);
-
-    console.log("完了");
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSentence(e.target.value);
   };
+
+  const message = answer.split("- ").map((line: string, index: number) => {
+    if (index === 0) return;
+
+    return (
+      <div
+        key={index}
+        className="w-full max-w-2xl p-5 m-5 bg-white rounded shadow-md h-auto"
+      >
+        <p className="text-lg text-gray-700">
+          {line}
+          <br />
+        </p>
+      </div>
+    );
+  });
+
   return (
     <main className="">
       <div className="m-8 max-w-[800px] mx-auto">
-        <h1 className="text-4xl font-bold mb-4">Analyze Script</h1>
+        <h1 className="text-4xl font-bold mb-4">Analyze Sentence</h1>
         <div className="border p-8 bg-gray-100 rounded-lg shadow-md">
           <form onSubmit={(e) => analyzeSentence(e)}>
             <textarea
               className="w-full p-2 mb-4 border rounded-md shadow-sm resize-none"
-              rows={10}
+              rows={5}
               onChange={handleChange}
             ></textarea>
             <button
@@ -61,7 +74,9 @@ export default function Home() {
             </button>
           </form>
         </div>
-        <p>{answer}</p>
+        <div className="flex flex-col items-center justify-center bg-gray-100">
+          <div className="p-5 m-5">{message}</div>
+        </div>
       </div>
     </main>
   );
