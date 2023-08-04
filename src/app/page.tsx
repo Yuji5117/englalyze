@@ -38,15 +38,17 @@ export default function Home() {
   const message = answer.split("- ").map((line: string, index: number) => {
     if (index === 0) return;
 
+    const test = line.split(":");
+
     return (
       <div
         key={index}
         className="w-full max-w-2xl p-5 m-5 bg-white rounded shadow-md h-auto"
       >
-        <p className="text-lg text-gray-700">
-          {line}
-          <br />
+        <p className="text-lg text-gray-700 border-b border-gray-300">
+          {test[0]}
         </p>
+        <p className="text-lg text-gray-700 pt-4">{test[1]}</p>
       </div>
     );
   });
