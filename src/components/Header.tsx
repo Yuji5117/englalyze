@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
 interface HeaderProps {
@@ -32,9 +33,12 @@ export const Header = ({ title }: HeaderProps) => {
           <span className="ml-3 text-xl">{title}</span>
         </a>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-          <a className="mr-5 hover:text-gray-900">First Link</a>
-          <a className="mr-5 hover:text-gray-900">Second Link</a>
-          <a className="mr-5 hover:text-gray-900">Third Link</a>
+          <Link href="/" className="mr-5 hover:text-gray-900">
+            Analyze Sentence
+          </Link>
+          <Link href="/translator" className="mr-5 hover:text-gray-900">
+            Translator
+          </Link>
         </nav>
         <button
           onClick={handleLoginLogout}
