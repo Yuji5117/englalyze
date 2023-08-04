@@ -1,4 +1,5 @@
 "use client";
+import ResultContainer from "@/components/ResultContainer";
 import ResultContext from "@/components/ResultContext";
 import { apiClient } from "@/libs/axios";
 import { useState } from "react";
@@ -36,6 +37,7 @@ export default function Home() {
               className="w-full p-2 mb-4 border rounded-md shadow-sm resize-none"
               rows={5}
               onChange={handleChange}
+              disabled={isLoading}
             ></textarea>
             <button
               disabled={isLoading}
@@ -49,15 +51,13 @@ export default function Home() {
             </button>
           </form>
         </div>
-        <div className="flex flex-col items-center justify-center bg-gray-100">
-          <div className="p-5 m-5">
-            {result.split("- ").map((context: string, index: number) => (
-              <div key={index}>
-                <ResultContext index={index} context={context} />
-              </div>
-            ))}
-          </div>
-        </div>
+        <ResultContainer>
+          {result.split("- ").map((context: string, index: number) => (
+            <div key={index}>
+              <ResultContext index={index} context={context} />
+            </div>
+          ))}
+        </ResultContainer>
       </div>
     </main>
   );
