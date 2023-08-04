@@ -1,9 +1,7 @@
 "use client";
-
-import axios from "axios";
+import { apiClient } from "@/libs/axios";
 import { useState } from "react";
 
-const endpoint = process.env.NEXT_PUBLIC_API_ENDPOINT as string;
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [sentence, setSentence] = useState<string>("");
@@ -14,17 +12,11 @@ export default function Home() {
 
     setIsLoading(true);
 
-    const res = await axios.post(
-      endpoint,
-      {
-        sentence,
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const res = await apiClient.post("", {
+      sentence,
+    });
+
+    console.log(res);
 
     setAnswer(res.data.message);
 
@@ -38,7 +30,7 @@ export default function Home() {
   const message = answer.split("- ").map((line: string, index: number) => {
     if (index === 0) return;
 
-    const test = line.split(":");
+    const [title, content] = line.split(":");
 
     return (
       <div
@@ -46,9 +38,9 @@ export default function Home() {
         className="w-full max-w-2xl p-5 m-5 bg-white rounded shadow-md h-auto"
       >
         <p className="text-lg text-gray-700 border-b border-gray-300">
-          {test[0]}
+          {title}
         </p>
-        <p className="text-lg text-gray-700 pt-4">{test[1]}</p>
+        <p className="text-lg text-gray-700 pt-4">{content}</p>
       </div>
     );
   });
