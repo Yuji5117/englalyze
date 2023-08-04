@@ -1,11 +1,12 @@
 "use client";
+import ResultContext from "@/components/ResultContext";
 import { apiClient } from "@/libs/axios";
 import { useState } from "react";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [sentence, setSentence] = useState<string>("");
-  const [answer, setAnswer] = useState<string>("");
+  const [result, setResult] = useState<string>("");
 
   const analyzeSentence = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -16,9 +17,7 @@ export default function Home() {
       sentence,
     });
 
-    console.log(res);
-
-    setAnswer(res.data.message);
+    setResult(res.data.message);
 
     setIsLoading(false);
   };
@@ -26,24 +25,6 @@ export default function Home() {
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setSentence(e.target.value);
   };
-
-  const message = answer.split("- ").map((line: string, index: number) => {
-    if (index === 0) return;
-
-    const [title, content] = line.split(":");
-
-    return (
-      <div
-        key={index}
-        className="w-full max-w-2xl p-5 m-5 bg-white rounded shadow-md h-auto"
-      >
-        <p className="text-lg text-gray-700 border-b border-gray-300">
-          {title}
-        </p>
-        <p className="text-lg text-gray-700 pt-4">{content}</p>
-      </div>
-    );
-  });
 
   return (
     <main className="">
@@ -69,7 +50,13 @@ export default function Home() {
           </form>
         </div>
         <div className="flex flex-col items-center justify-center bg-gray-100">
-          <div className="p-5 m-5">{message}</div>
+          <div className="p-5 m-5">
+            {result.split("- ").map((context: string, index: number) => (
+              <div key={index}>
+                <ResultContext index={index} context={context} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </main>
