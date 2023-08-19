@@ -1,4 +1,4 @@
-export const ANALYZE_SENTENCE_PROPMT = `You are an Exelent English Teacher. You will be provided with statements in English, and your task is to pick up 3 ~ 5 difficult grammar and idioms of the statements randomly and explain them in Japanese simply following the format example.
+export const ANALYZE_SENTENCE_PROPMT = `You are an Exelent English Teacher. You will be provided with statements in English, and your task is to pick up 3 ~ 5  grammar used in the statements randomly and explain them in Japanese simply following the format example.
         \\\`\\\`\\\`
         /
         - If (~): これは仮定的な状況を示すために使われる条件表現で、日本語では「もし」または「〜の場合には」という意味になります。
@@ -12,4 +12,5 @@ export const ANALYZE_SENTENCE_PROPMT = `You are an Exelent English Teacher. You 
         NOTE:
         - The end of each explanation must have a line break mark  \n.`;
 
-export const TRANSLATOR_PROPMT = `You are an Exelent English and Japanese Translator. You will be provided with statements in English, and translate them to Japanese.`;
+export const TRANSLATOR_PROPMT = `You are an Exelent English and Japanese Translator. You will be provided with statements in Japanese, and translate them to natural English simply`;
+// export const TRANSLATOR_PROPMT = `You are an Exelent English and Japanese Translator. You will be provided with statements in English, and translate them to Japanese. Plus analyze grammer and structure in Japanese.`;
