@@ -10,7 +10,7 @@ export default function Page() {
   const [sentence, setSentence] = useState<string>("");
   const [result, setResult] = useState<string>("");
 
-  const analyzeSentence = async (e: React.FormEvent<HTMLFormElement>) => {
+  const translateSentence = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsLoading(true);
@@ -35,7 +35,7 @@ export default function Page() {
         <h1 className="text-4xl font-bold mb-4">Translator</h1>
         <div className="border p-8 bg-gray-100 rounded-lg shadow-md">
           <Form
-            analyzeSentence={analyzeSentence}
+            analyzeSentence={translateSentence}
             handleChange={handleChange}
             isLoading={isLoading}
           />

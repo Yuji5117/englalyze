@@ -2,7 +2,7 @@
 import Form from "@/components/Form";
 import ResultContainer from "@/components/ResultContainer";
 import ResultContext from "@/components/ResultContext";
-import { ANALYZE_SENTENCE_PROPMT, TRANSLATOR_PROPMT } from "@/config/const";
+import { ANALYZE_SENTENCE_PROPMT } from "@/config/const";
 import { apiClient } from "@/libs/axios";
 import { useState } from "react";
 
